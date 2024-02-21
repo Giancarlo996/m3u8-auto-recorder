@@ -44,7 +44,7 @@ docker-compose up --build
 ### Example
 
 ```yaml
-version: '3'
+version: "3"
 
 services:
   recorder:
@@ -55,6 +55,6 @@ services:
     volumes:
       - /etc/recorder:/data
     environment:
-      TZ: Asia/Shanghai
-      M3U8_URL: "https://localhost/media/media.m3u8"
+      - TZ: Asia/Shanghai
+      - M3U8_URL: "https://localhost/media/media.m3u8"
 ```
