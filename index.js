@@ -3,7 +3,7 @@ const { exec } = require('child_process');
 const moment = require('moment');
 
 const m3u8Url = process.env.M3U8_URL;
-const intervalSeconds = process.env.INTERVAL_SECONDS;
+const intervalSeconds = parseInt(process.env.INTERVAL_SECONDS);
 
 // Get the current date and time formatted as 'YYYY-MM-DD HH:mm:ss'
 function getCurrentFormattedDateTime() {
@@ -15,7 +15,7 @@ switch (true) {
     console.error(getCurrentFormattedDateTime(), 'M3U8_URL environment variable is not set');
     setTimeout(() => process.exit(1), 1000 * 20);
     return;
-  case typeof intervalSeconds !== 'number' || intervalSeconds <= 0:
+  case typeof intervalSeconds !== 'number' || intervalSeconds <= 0 || isNaN(intervalSeconds) :
     console.error(getCurrentFormattedDateTime(), 'INTERVAL_SECONDS environment variable is not set or invalid');
     setTimeout(() => process.exit(1), 1000 * 20);
     return;
