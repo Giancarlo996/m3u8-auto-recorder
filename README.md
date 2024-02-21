@@ -1,4 +1,3 @@
-```yaml
 ## Automatic Recording of M3U8 Live Streams Script
 
 This Node.js script automatically monitors a specified M3U8 live stream and starts recording when the broadcast begins.
