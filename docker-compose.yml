@@ -6,6 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: m3u8AutoRecorder
+    restart: always
     volumes:
       # Mount a local directory to the /data directory in the container
       - /etc/recorder:/data

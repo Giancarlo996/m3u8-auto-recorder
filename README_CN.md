@@ -52,6 +52,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: m3u8AutoRecorder
+    restart: always
     volumes:
       - /etc/recorder:/data
     environment:
