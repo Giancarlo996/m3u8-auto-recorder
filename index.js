@@ -41,7 +41,7 @@ function startRecording() {
   // Get the current time
   const now = moment();
   const formattedDate = now.format('YYYY-MM-DD_HH-mm-ss');
-  const outputFilePath = `./data/${formattedDate}.ts`;
+  const outputFilePath = `/data/${formattedDate}.ts`;
 
   const streamlinkCommand = `streamlink ${m3u8Url} best -o ${outputFilePath}`;
   const streamlinkProcess = exec(streamlinkCommand);
