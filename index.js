@@ -15,7 +15,7 @@ switch (true) {
     console.error(getCurrentFormattedDateTime(), 'M3U8_URL environment variable is not set');
     setTimeout(() => process.exit(1), 1000 * 20);
     return;
-  case typeof intervalSeconds !== 'number' || intervalSeconds <= 0 || isNaN(intervalSeconds) :
+  case typeof intervalSeconds !== 'number' || intervalSeconds <= 0 || isNaN(intervalSeconds):
     console.error(getCurrentFormattedDateTime(), 'INTERVAL_SECONDS environment variable is not set or invalid');
     setTimeout(() => process.exit(1), 1000 * 20);
     return;
@@ -87,6 +87,7 @@ async function monitorM3U8() {
 
 // Start the monitoring process
 function startMonitoring() {
+  monitorM3U8();
   monitorInterval = setInterval(monitorM3U8, 1000 * intervalSeconds);
   console.log(getCurrentFormattedDateTime(), 'Monitoring started.');
 }
