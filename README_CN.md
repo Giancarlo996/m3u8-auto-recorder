@@ -55,6 +55,7 @@ services:
     volumes:
       - /etc/recorder:/data
     environment:
-      - TZ: Asia/Shanghai
-      - M3U8_URL: "https://localhost/media/media.m3u8"
+      - INTERVAL_SECONDS=60
+      - M3U8_URL=https://localhost/media/media.m3u8
+      - TZ=Asia/Shanghai
 ```
