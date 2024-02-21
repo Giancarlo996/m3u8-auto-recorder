@@ -1,19 +1,18 @@
-FROM alpine
+FROM ubuntu
 
 WORKDIR /app
 
 COPY . .
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+RUN sed -i 's/archive.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
-RUN apk add --no-cache nodejs npm git python3 build-base
+RUN apt-get update && apt-get install -y nodejs npm streamlink
 
-RUN git clone https://github.com/streamlink/streamlink.git
-RUN cd streamlink && python3 setup.py install
+RUN npm config set registry http://mirrors.cloud.tencent.com/npm/
 
 RUN npm install
 
-VOLUME [ "/data" ]
+VOLUME ["/data"]
 
 CMD ["node", "index.js"]
 
