@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  recorder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: m3u8AutoRecorder
+    volumes:
+      # Mount a local directory to the /data directory in the container
+      - /etc/recorder:/data
+    environment:
+      TZ=Asia/Shanghai
+      # Set the M3U8_URL environment variable
+      M3U8_URL=YOUR_M3U8_URL_HERE
