@@ -3,9 +3,26 @@ const { exec } = require('child_process');
 const moment = require('moment');
 
 const m3u8Url = process.env.M3U8_URL;
+const intervalSeconds = process.env.INTERVAL_SECONDS;
+
+// Get the current date and time formatted as 'YYYY-MM-DD HH:mm:ss'
+function getCurrentFormattedDateTime() {
+  return moment().format('YYYY-MM-DD HH:mm:ss');
+}
+
+switch (true) {
+  case !m3u8Url:
+    console.error(getCurrentFormattedDateTime(), 'M3U8_URL environment variable is not set');
+    setTimeout(() => process.exit(1), 1000 * 20);
+    return;
+  case typeof intervalSeconds !== 'number' || intervalSeconds <= 0:
+    console.error(getCurrentFormattedDateTime(), 'INTERVAL_SECONDS environment variable is not set or invalid');
+    setTimeout(() => process.exit(1), 1000 * 20);
+    return;
+}
 
 let isRecording = false;
-let monitorInterval;
+let monitorInterval = -1;
 
 // Check if the live streaming based on M3U8 content has started
 function isLiveStreamingStarted(m3u8Content) {
@@ -17,7 +34,7 @@ function isLiveStreamingStarted(m3u8Content) {
 // Start recording
 function startRecording() {
   if (isRecording) {
-    console.log('Recording is already in progress.');
+    console.log(getCurrentFormattedDateTime(), 'Recording is already in progress.');
     return;
   }
 
@@ -30,21 +47,21 @@ function startRecording() {
   const ffmpegProcess = exec(ffmpegCommand);
 
   ffmpegProcess.stdout.on('data', (data) => {
-    console.log(`FFmpeg stdout: ${data}`);
+    console.log(getCurrentFormattedDateTime(), `FFmpeg stdout: ${data}`);
   });
 
   ffmpegProcess.stderr.on('data', (data) => {
-    console.error(`FFmpeg stderr: ${data}`);
+    console.error(getCurrentFormattedDateTime(), `FFmpeg stderr: ${data}`);
   });
 
   ffmpegProcess.on('close', (code) => {
-    console.log(`FFmpeg process exited with code ${code}`);
+    console.log(getCurrentFormattedDateTime(), `FFmpeg process exited with code ${code}`);
     isRecording = false;
     startMonitoring();
   });
 
   isRecording = true;
-  console.log('Recording started.');
+  console.log(getCurrentFormattedDateTime(), 'Recording started.');
   clearInterval(monitorInterval);
 }
 
@@ -58,19 +75,20 @@ async function monitorM3U8() {
       startRecording();
     }
   } catch (error) {
-    if (error.response.status == 404) {
+    if (error.response.status >= 400 && error.response.status < 500) {
       // Not live yet
-      console.log('Not live yet');
-    } else {
-      console.error('Error occurred while monitoring M3U8:', error);
+      console.log(getCurrentFormattedDateTime(), 'Not live yet');
     }
+    // else {
+    //   console.error(getCurrentFormattedDateTime(), 'Error occurred while monitoring M3U8:', error);
+    // }
   }
 }
 
 // Start the monitoring process
 function startMonitoring() {
-  monitorInterval = setInterval(monitorM3U8, 1000);
-  console.log('Monitoring started.');
+  monitorInterval = setInterval(monitorM3U8, 1000 * intervalSeconds);
+  console.log(getCurrentFormattedDateTime(), 'Monitoring started.');
 }
 
 // Start the monitoring process
