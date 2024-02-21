@@ -24,9 +24,9 @@ function startRecording() {
   // Get the current time
   const now = moment();
   const formattedDate = now.format('YYYY-MM-DD_HH-mm-ss');
-  const outputFilePath = `/data/${formattedDate}.flv`;
+  const outputFilePath = `/data/${formattedDate}_%03d.ts`;
 
-  const ffmpegCommand = `ffmpeg -i ${m3u8Url} -c copy ${outputFilePath}`;
+  const ffmpegCommand = `ffmpeg -i ${m3u8Url}  -c copy -f segment -segment_time 60 -reset_timestamps 1 ${outputFilePath}`;
   const ffmpegProcess = exec(ffmpegCommand);
 
   ffmpegProcess.stdout.on('data', (data) => {
