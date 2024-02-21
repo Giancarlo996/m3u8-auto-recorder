@@ -41,21 +41,21 @@ function startRecording() {
   // Get the current time
   const now = moment();
   const formattedDate = now.format('YYYY-MM-DD_HH-mm-ss');
-  const outputFilePath = `/data/${formattedDate}_%03d.ts`;
+  const outputFilePath = `./data/${formattedDate}.ts`;
 
-  const ffmpegCommand = `ffmpeg -i ${m3u8Url}  -c copy -f segment -segment_time 60 -reset_timestamps 1 ${outputFilePath}`;
-  const ffmpegProcess = exec(ffmpegCommand);
+  const streamlinkCommand = `streamlink ${m3u8Url} best -o ${outputFilePath}`;
+  const streamlinkProcess = exec(streamlinkCommand);
 
-  ffmpegProcess.stdout.on('data', (data) => {
-    console.log(getCurrentFormattedDateTime(), `FFmpeg stdout: ${data}`);
+  streamlinkProcess.stdout.on('data', (data) => {
+    console.log(getCurrentFormattedDateTime(), `Streamlink stdout: ${data}`);
   });
 
-  ffmpegProcess.stderr.on('data', (data) => {
-    console.error(getCurrentFormattedDateTime(), `FFmpeg stderr: ${data}`);
+  streamlinkProcess.stderr.on('data', (data) => {
+    console.error(getCurrentFormattedDateTime(), `Streamlink stderr: ${data}`);
   });
 
-  ffmpegProcess.on('close', (code) => {
-    console.log(getCurrentFormattedDateTime(), `FFmpeg process exited with code ${code}`);
+  streamlinkProcess.on('close', (code) => {
+    console.log(getCurrentFormattedDateTime(), `Streamlink process exited with code ${code}`);
     isRecording = false;
     startMonitoring();
   });

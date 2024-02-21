@@ -12,7 +12,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "apt-get update && apt-get install -y ffmpeg && npm install",
+	"postCreateCommand": "apt-get update && apt-get install -y streamlink && npm install",
 
 	// Configure tool-specific properties.
 	// "customizations": {},

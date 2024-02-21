@@ -33,12 +33,12 @@ docker-compose up --build
 
 - axios: Used for making HTTP requests to fetch M3U8 content.
 - moment: Utilized for date and time handling.
-- ffmpeg: Essential for recording live streams.
+- streamlink: Essential for recording live streams.
 
 ### Notes
 
 - Ensure accurate configuration of the `M3U8_URL` environment variable.
-- Successful recording of live streams requires FFmpeg installation and setup.
+- Successful recording of live streams requires Streamlink installation and setup.
 - The timezone is already configured as Asia/Shanghai.
 
 ### Example

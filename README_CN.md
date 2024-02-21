@@ -33,12 +33,12 @@ docker-compose up --build
 
 - axios：用于发出 HTTP 请求以获取 M3U8 内容。
 - moment：用于处理日期和时间。
-- ffmpeg：用于录制直播流。
+- streamlink：用于录制直播流。
 
 ### 注意事项
 
 - 请确保正确设置 `M3U8_URL` 环境变量。
-- 您需要安装并配置 FFmpeg 才能成功录制直播流。
+- 您需要安装并配置 Streamlink 才能成功录制直播流。
 - 时区已设置为 Asia/Shanghai。
 
 ### 示例
