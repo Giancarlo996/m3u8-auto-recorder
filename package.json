@@ -4,6 +4,7 @@
   "description": "Node.js script for automatically monitoring and recording M3U8 live streams.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
