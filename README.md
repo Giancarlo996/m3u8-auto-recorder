@@ -9,8 +9,8 @@ English / [简体中文](README_CN.md)
 1. Clone this repository which includes the Docker Compose file `docker-compose.yml`:
 
 ```bash
-git clone https://github.com/your-repo.git
-cd your-repo
+git clone https://github.com/Giancarlo996/m3u8-auto-recorder.git
+cd m3u8-auto-recorder
 ```
 
 2. Edit the `M3U8_URL` environment variable in the Docker Compose file to set it to the M3U8 live stream URL you want to monitor and record.

@@ -9,8 +9,8 @@
 1. 克隆此存储库包含 Docker Compose 文件 `docker-compose.yml`：
 
 ```bash
-git clone https://github.com/your-repo.git
-cd your-repo
+git clone https://github.com/Giancarlo996/m3u8-auto-recorder.git
+cd m3u8-auto-recorder
 ```
 
 2. 编辑 Docker Compose 文件中的环境变量 `M3U8_URL`，设置为您要监控和录制的 M3U8 直播流地址。
