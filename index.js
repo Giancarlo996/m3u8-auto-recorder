@@ -87,8 +87,8 @@ async function monitorM3U8() {
 
 // Start the monitoring process
 function startMonitoring() {
-  monitorM3U8();
   monitorInterval = setInterval(monitorM3U8, 1000 * intervalSeconds);
+  monitorM3U8();
   console.log(getCurrentFormattedDateTime(), 'Monitoring started.');
 }
 
